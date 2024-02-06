@@ -22,7 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("antialiased relative", font.className)}>
+      <body
+        className={cn(
+          "antialiased relative text-black bg-white dark:text-white dark:bg-black",
+          font.className
+        )}
+      >
         {children}
       </body>
     </html>

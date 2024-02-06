@@ -5,8 +5,8 @@ import { differenceInYears } from "date-fns";
 
 export default async function Home(): Promise<JSX.Element> {
   return (
-    <div className="relative flex flex-col min-h-[100dvh] text-black bg-white dark:text-white dark:bg-black">
-      <main className="relative p-6 flex grow gap-8 flex-col mx-auto max-w-screen-md">
+    <div className="relative flex flex-col min-h-[100dvh]">
+      <main className="relative p-6 flex grow gap-8 flex-col mx-auto max-w-screen-lg">
         <section id="head" className="flex flex-col gap-4 relative">
           <a
             download
@@ -23,8 +23,8 @@ export default async function Home(): Promise<JSX.Element> {
               alt="Pedro Pereira"
             />
           </div>
-          <div className="flex flex-row gap-5 items-center w-full justify-start">
-            <div className="flex flex-col gap-2 w-[28%] text-xl">
+          <div className="flex flex-row gap-5 sm:space-x-14 items-center w-full justify-start">
+            <div className="flex flex-col gap-2 text-xl">
               <h1 className="leading-5 font-semibold">Pedro Pereira</h1>
               <h2 className="leading-5 text-[1.20rem]">Frontend Dev.</h2>
             </div>
@@ -57,14 +57,14 @@ export default async function Home(): Promise<JSX.Element> {
           </p>
         </SectionContainer>
         <SectionContainer id="experience" title="Experience">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-5">
             {experiences.map((experience) => (
               <div
                 key={experience.type}
-                className="grid grid-flow-col grid-cols-6  w-full"
+                className="grid grid-flow-col grid-cols-6 w-full"
               >
-                <div className="flex flex-col justify-between col-span-2">
-                  <div className="flex flex-col h-auto sm:h-20">
+                <div className="flex flex-col justify-between col-span-2 gap-y-10">
+                  <div className="flex flex-col">
                     <span className="text-sm font-semibold leading-4 text-wrap">
                       {experience.type}
                     </span>
@@ -79,7 +79,7 @@ export default async function Home(): Promise<JSX.Element> {
                     </span>
                   </div>
                 </div>
-                <div className="grid-cols-subgrid col-span-1" />
+                <div className="grid-cols-subgrid col-span-1 sm:hidden" />
                 <div className="flex flex-col col-span-4">
                   {experience.activities.map((activity) => (
                     <span
