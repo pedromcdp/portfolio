@@ -1,14 +1,15 @@
+import { SectionContainer } from "@/components/SectionContainer";
 import Image from "next/image";
+import { education, skills } from "@/data";
+import { Fragment } from "react";
+import { differenceInYears } from "date-fns";
 
-export default function Home() {
+export default async function Home(): Promise<JSX.Element> {
   return (
-    <main className="relative flex min-h-[100dvh] flex-col bg-white text-black">
-      <div className="flex flex-col gap-6 items-start justify-start absolute left-[calc(50%_-_274.5px)] top-[21px]">
-        <section
-          id="head"
-          className="flex flex-col gap-[15px] items-start justify-start self-stretch shrink-0 relative"
-        >
-          <div className="h-16 w-16 relative">
+    <Fragment>
+      <main className="relative mx-auto max-w-screen-sm pt-10 px-6 flex min-h-[100vh] gap-6 flex-col bg-white text-black">
+        <section id="head" className="flex flex-col gap-4">
+          <div className="h-14 w-14 relative">
             <Image
               className="object-cover"
               src="/1x1.jpg"
@@ -16,47 +17,68 @@ export default function Home() {
               alt="Pedro Pereira"
             />
           </div>
-          <div className="flex flex-row gap-5 items-center justify-start shrink-0 relative">
-            <div className="flex flex-col gap-[5px] items-start justify-end shrink-0 w-[139px] relative">
-              <div className="text-[#000000] text-left text-[17px] leading-[15.12px] font-semibold relative w-[190px]">
-                Pedro Pereira{" "}
-              </div>
-              <div className="text-[#000000] text-left text-[17px] leading-[15.12px] font-normal relative w-[161px]">
-                Frontend Dev.{" "}
-              </div>
+          <div className="flex flex-row gap-5 items-center w-full justify-start">
+            <div className="flex flex-col gap-2 w-[28%] text-xl">
+              <h1 className="leading-4 font-semibold">Pedro Pereira</h1>
+              <h2 className="leading-4">Frontend Dev.</h2>
             </div>
-            <div className="flex flex-col gap-[3px] items-start justify-center shrink-0 w-[115px] relative">
-              <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[11px] font-normal relative w-[119px]">
-                Phone
-              </div>
-              <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[11px] font-normal relative w-32">
-                pedromcdp@gmail.com{" "}
-              </div>
-              <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[11px] font-normal relative w-32">
-                github.com/pedromcdp{" "}
-              </div>
+            <div className="flex flex-col gap-[3px] relative text-xs">
+              <a href="mailto:pedromcdp@gmail.com">pedromcdp@gmail.com</a>
+              <a href="https://github.com/pedromcdp" target="_blank">
+                github.com/pedromcdp
+              </a>
             </div>
           </div>
         </section>
-        <div className="flex flex-row gap-5 items-start justify-start shrink-0 w-[549px] relative">
-          <div className="text-[#000000] text-left font-['SpaceGrotesk-SemiBold',_sans-serif] text-sm leading-[15.12px] font-semibold relative w-[139px]">
-            About me{" "}
+        <SectionContainer id="about" title="About Me">
+          <p className="text-xs leading-3">
+            My name is Pedro Miguel Pereira, I&#039;m{" "}
+            {
+              differenceInYears("02/11/1998", new Date())
+                .toString()
+                .split("-")[1]
+            }{" "}
+            years old, I live in the city of Aveiro and I have a Master&#039;s
+            degree in Communication and Web Technologies from the University of
+            Aveiro. From a very young age I&#039;ve been curious about
+            technology and what it offers to our lives, which has led me to get
+            interested in application development, with a special focus on web
+            development. I&#039;m motivated and committed, I’m a good team
+            worker(?), I like to exchange ideas with colleagues and I always
+            give my best in every project I&#039;m involved in. Im fluent in
+            portuguese and english.{" "}
+          </p>
+        </SectionContainer>
+        <SectionContainer id="experience" title="Experience">
+          tbd
+        </SectionContainer>
+        <SectionContainer id="education" title="Education">
+          <div className="flex flex-col gap-3">
+            {education.map((item) => (
+              <div key={item.title} className="flex flex-col gap-0.5">
+                <h4 className="text-xs capitalize font-semibold leading-none">
+                  {item.title}
+                </h4>
+                <span className="text-[0.65rem] leading-3 text-black/60">
+                  {item.subtitle}
+                </span>
+                <span className="text-[0.60rem] leading-5 text-black/60">
+                  {item.date}
+                </span>
+              </div>
+            ))}
           </div>
-          <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[9px] leading-[10px] font-normal relative w-[390px] h-20">
-            My name is Pedro Miguel Pereira, I&#039;m 25 years old, I live in
-            the city of Aveiro and I have a Master&#039;s degree in
-            Communication and Web Technologies from the University of Aveiro.
-            From a very young age I&#039;ve been curious about technology and
-            what it offers to our lives, which has led me to get interested in
-            application development, with a special focus on web development.
-            I&#039;m motivated and committed, I’m a good team worker(?), I like
-            to exchange ideas with colleagues and I always give my best in every
-            project I&#039;m involved in.
-            <br />
-            Im fluent in portuguese and english.{" "}
+        </SectionContainer>
+        <SectionContainer id="skills" title="Skills">
+          <div className="grid grid-cols-4 grid-rows-3 grid-flow-col gap-x-6">
+            {skills.map((skill) => (
+              <span key={skill} className="text-[0.65rem] col-span-1 leading-4">
+                {skill}
+              </span>
+            ))}
           </div>
-        </div>
-        <div className="flex flex-row gap-5 items-start justify-start shrink-0 w-[549px] relative">
+        </SectionContainer>
+        {/* <div className="flex flex-row gap-5 items-start justify-start shrink-0 w-[549px] relative">
           <div className="flex flex-row gap-5 items-start justify-start shrink-0 w-[137px] relative">
             <div className="text-[#000000] text-left font-['SpaceGrotesk-SemiBold',_sans-serif] text-sm leading-[15.12px] font-semibold relative w-[139px]">
               Experience{" "}
@@ -204,125 +226,13 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-row gap-5 items-start justify-start shrink-0 w-[549px] relative">
-          <div className="flex flex-row gap-5 items-start justify-start shrink-0 w-[137px] relative">
-            <div className="text-[#000000] text-left font-['SpaceGrotesk-SemiBold',_sans-serif] text-sm leading-[15.12px] font-semibold relative w-[139px]">
-              Education{" "}
-            </div>
-          </div>
-          <div className="flex flex-col gap-5 items-start justify-start shrink-0 relative">
-            <div className="flex flex-col gap-[5px] items-start justify-start shrink-0 w-[392px] relative">
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 w-[392px] relative">
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-SemiBold',_sans-serif] text-[10px] leading-[10px] font-semibold relative w-[392px]">
-                  Master’s in communication and web technologies{" "}
-                </div>
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  University of Aveiro{" "}
-                </div>
-              </div>
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 relative">
-                <div
-                  className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[7px] leading-[7px] font-normal relative w-[133px]"
-                  style={{ opacity: "0.6000000238418579" }}
-                >
-                  2021-2023{" "}
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col gap-[5px] items-start justify-start shrink-0 w-[392px] relative">
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 w-[392px] relative">
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-SemiBold',_sans-serif] text-[10px] leading-[10px] font-semibold relative w-[392px]">
-                  Degree in Multimedia Communication
-                </div>
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  Polytechnic Institute of Guarda{" "}
-                </div>
-              </div>
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 relative">
-                <div
-                  className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[7px] leading-[7px] font-normal relative w-[133px]"
-                  style={{ opacity: "0.6000000238418579" }}
-                >
-                  2017-2020
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col gap-[5px] items-start justify-start shrink-0 w-[392px] relative">
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 w-[392px] relative">
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-SemiBold',_sans-serif] text-[10px] leading-[10px] font-semibold relative w-[392px]">
-                  Professional course for computer systems management and
-                  programming technicians{" "}
-                </div>
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  Escola Secundária José Estêvão{" "}
-                </div>
-              </div>
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 relative">
-                <div
-                  className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[7px] leading-[7px] font-normal relative w-[133px]"
-                  style={{ opacity: "0.6000000238418579" }}
-                >
-                  2013-2016{" "}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-row gap-5 items-start justify-start shrink-0 w-[549px] relative">
-          <div className="flex flex-row gap-5 items-start justify-start shrink-0 w-[137px] relative">
-            <div className="text-[#000000] text-left font-['SpaceGrotesk-SemiBold',_sans-serif] text-sm leading-[15.12px] font-semibold relative w-[139px]">
-              Skills{" "}
-            </div>
-          </div>
-          <div className="flex flex-col gap-5 items-start justify-start shrink-0 relative">
-            <div className="flex flex-row gap-[13px] items-start justify-start shrink-0 w-[392px] relative">
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 w-[76px] relative">
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  JavaScript{" "}
-                </div>
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  Typescript{" "}
-                </div>
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  React{" "}
-                </div>
-              </div>
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 w-[70px] relative">
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  Next.js{" "}
-                </div>
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  Node.js{" "}
-                </div>
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  Express{" "}
-                </div>
-              </div>
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 w-[70px] relative">
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  MongoDB{" "}
-                </div>
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  TailwindCSS{" "}
-                </div>
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  React Native{" "}
-                </div>
-              </div>
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 w-[70px] relative">
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  Git{" "}
-                </div>
-                <div className="text-[#000000] text-left font-['SpaceGrotesk-Regular',_sans-serif] text-[10px] leading-[10px] font-normal relative w-[392px]">
-                  Docker{" "}
-                </div>
-              </div>
-              <div className="flex flex-col gap-0.5 items-start justify-start shrink-0 w-[133px] h-[7px] relative"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+        </div> */}
+      </main>
+      <footer className="w-full text-center">
+        <span className="text-xs">
+          Pedro Miguel Pereira &copy; {new Date().getFullYear()}{" "}
+        </span>
+      </footer>
+    </Fragment>
   );
 }
