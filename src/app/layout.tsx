@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/utils";
 
 const font = Space_Grotesk({
   preload: true,
@@ -21,8 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>
-        <div className="antialiased relative">{children}</div>
+      <body className={cn("antialiased relative", font.className)}>
+        {children}
       </body>
     </html>
   );
