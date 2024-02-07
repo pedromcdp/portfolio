@@ -46,7 +46,7 @@ export const experiences: IExperience[] = [
     type: "Academic Internship",
     title: "Web Developer",
     identity: "Decimal Informática e Gestão, Lda - Aveiro",
-    timeline: "October 2022 - July 2023",
+    timeline: "October 2015 - April 2016",
     activities: [
       "Responsible for maintaining and updating content on the company’s various websites;",
       "Maintenance of the company’s online shop;",
